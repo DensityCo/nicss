@@ -114,7 +114,9 @@ if (argv.clean) {
 
         const source = path.join('styles', styleSheetName);
         console.log(source, "=>", target);
-        return fsp.symlink(target, source);
+        return fsp.symlink(target, source).catch(err => {
+          console.log("Error symlinking:", err);
+        });
       });
 
       return Promise.all(all);
