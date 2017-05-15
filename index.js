@@ -114,8 +114,14 @@ if (argv.clean) {
 
         const source = path.join('styles', styleSheetName);
         console.log(source, "=>", target);
-        return fsp.symlink(target, source).catch(err => {
-          console.log("Error symlinking:", err);
+        return fsp.lstat(source).then(exists => {
+          if (!exists) {
+            return fsp.symlink(target, source).catch(err => {
+              console.log("Error symlinking:", err);
+            });
+          } else {
+            console.warn(`NOTE: ${source} already exists, not symlinking over it...`);
+          }
         });
       });
 
