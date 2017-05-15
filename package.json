@@ -1,0 +1,21 @@
+{
+  "name": "nicss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "nicss": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fs-promise": "^2.0.2",
+    "minimist": "^1.2.0",
+    "mkdirp-promise": "^5.0.1",
+    "rimraf-promise": "^2.0.0"
+  }
+}
