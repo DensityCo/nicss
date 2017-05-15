@@ -104,7 +104,7 @@ if (argv.clean) {
         const target = path.join('..', style.style);
 
         // Given a file extension, determine the name for the stylesheet
-        const normalizedStylesheetName = style.normalized.replace(/.css$/, '').replace(/\//, '-');
+        const normalizedStylesheetName = style.normalized.replace(/.css$/, '').replace(/\//g, '-');
         let styleSheetName;
         if (extension === 'scss') {
           styleSheetName = `_${normalizedStylesheetName}.scss`
