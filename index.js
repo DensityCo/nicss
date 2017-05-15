@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 const fsp = require('fs-promise');
 const path = require('path');
 const mkdirp = require('mkdirp-promise');
@@ -11,9 +12,9 @@ const NODE_MODULES_ROOT = 'node_modules/';
 // Given a package.json location, return the value of the style property within.
 function getPackageStyleSheet(packageJsonLocation) {
   return fsp.readFile(packageJsonLocation).then(data => {
-    const package = JSON.parse(data);
-    if (package.style) {
-      return path.join(path.dirname(packageJsonLocation), package.style)
+    const pkg = JSON.parse(data);
+    if (pkg.style) {
+      return path.join(path.dirname(packageJsonLocation), pkg.style)
     } else {
       return false;
     }
@@ -26,7 +27,8 @@ function normalizePackageName(packageJsonPath) {
     .replace(/\/package.json$/, '');
 }
 
-function recurse(basePath, styles=[]) {
+function recurse(basePath, styles) {
+  styles = styles || []
   return fsp.readdir(basePath).then(files => {
     // Loop through each file in the directory
     const all = files.map(file => {
