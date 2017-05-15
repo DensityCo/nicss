@@ -14,6 +14,13 @@ property and symlinks each compiled css file to a given folder (the `--root` arg
 default, the `styles/` directory). Then, you can point your scss / less / stylus compiler at that
 folder and easily bring in tyles from other packagesthe!
 
+## How to use
+1. Install Nicss: `npm i -S @density/nicss`
+2. Give it a try manually first: run `./node_modules/.bin/nicss`
+3. Add a `postinstall` hook to your package, so that after installing, css dependencies are
+   extracted for you: `"postinstall": "nicss"`
+4. Done. CSS dependencies will be automatically extracted when you run `npm install`.
+
 ## Why not webpack?
 Webpack is magic. Magic can be great when it works, but can be confusing and complicated. We've
 opted to minimize our use of webpack so that we have a deep understanding of our build process.
