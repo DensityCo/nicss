@@ -28,7 +28,6 @@ function normalizePackageName(packageJsonPath) {
 
 function recurse(basePath, styles=[]) {
   return fsp.readdir(basePath).then(files => {
-
     // Loop through each file in the directory
     const all = files.map(file => {
       const packageJsonPath = path.join(basePath, file);
@@ -60,20 +59,26 @@ function recurse(basePath, styles=[]) {
 
 const argv = minimist(process.argv.slice(2));
 const root = argv.root || 'styles/';
+const extension = argv.ext || 'css';
 
 if (argv.help || argv.h || argv['?']) {
-  console.log(`Usage: nicss [--root] [--clean]`);
+  console.log(`Usage: nicss [--root] [--clean] [--ext]`);
   console.log();
   console.log(`Options:`);
   console.log();
   console.log('--root dir ........ path to the directory to symlink styles within, defaults to `styles/`');
   console.log('--clean ........... instead of installing dependencies, remove all dependencies.');
+  console.log('--ext scss ........ extension to give to all linked styles, defaults to `css`');
   console.log();
   console.log(`Examples:`);
   console.log();
   console.log(`$ nicss`);
   console.log(`🔗  Symlinking styles to styles/`);
-  console.log(`styles/_normalize.scss => ../node_modules/normalize.css/normalize.css`);
+  console.log(`styles/_normalize.css => ../node_modules/normalize.css/normalize.css`);
+  console.log(`✅  Linked 1 style(s) into styles/`);
+  console.log(`$ nicss --ext scss`);
+  console.log(`🔗  Symlinking styles to styles/`);
+  console.log(`styles/_normalize.scss => ../node_modules/normalize.css/normalize.scss`);
   console.log(`✅  Linked 1 style(s) into styles/`);
   console.log(`$ nicss --clean`);
   console.log(`Cleaned up styles in styles/`);
@@ -97,7 +102,17 @@ if (argv.clean) {
     }).then(() => {
       const all = styles.map(style => {
         const target = path.join('..', style.style);
-        const source = path.join('styles', `_${style.normalized.replace(/.css$/, '').replace(/\//, '-')}.scss`);
+
+        // Given a file extension, determine the name for the stylesheet
+        const normalizedStylesheetName = style.normalized.replace(/.css$/, '').replace(/\//, '-');
+        let styleSheetName;
+        if (extension === 'scss') {
+          styleSheetName = `_${normalizedStylesheetName}.scss`
+        } else {
+          styleSheetName = `${normalizedStylesheetName}.${extension}`
+        }
+
+        const source = path.join('styles', styleSheetName);
         console.log(source, "=>", target);
         return fsp.symlink(target, source);
       });
