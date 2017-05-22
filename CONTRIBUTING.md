@@ -12,3 +12,25 @@ If you'd like to publish manually, simply run `make publish`. Make will transpil
 put the output in `dist/index.js`. Then, it'll publish your changes to npm.
 
 If you'd like to make a build but not publish, run `make build`. Also, `make clean` is a thing too.
+
+## Commit messages
+All Density web projects strive to use [semantic commit messages](https://seesparkbox.com/foundry/semantic_commit_messages). In particular, we make use of the prefixes:
+- `code`
+- `chore`
+- `docs` - indicates a non-code update to documentation, such as a README change.
+- `test` - indicates updates to test code.
+- `slug` - indicates a useless commit, such as causing a ci rebuild. These should be rebased together prior
+  to merging if at all possible.
+- `design` - indicates stylesheet changes or other visual updates
+
+In addition, an optional second tier of description can be added if helpful with parenthesis. This
+is usually used to provide context on a code update, a chore, or a slug.
+
+### Examples
+```
+code: cleaned up extra ajax actions, clear spaces explicitly on set organization
+code(test): added test for foo, bar, abz baz
+docs: add ci readme badge
+slug: ci update
+design: adjust vertical padding on cards
+```
