@@ -17,8 +17,5 @@
     "minimist": "^1.2.0",
     "mkdirp-promise": "^5.0.1",
     "rimraf-promise": "^2.0.0"
-  },
-  "publishConfig": {
-    "registry": "http://npmregistry.density.rodeo"
   }
 }
