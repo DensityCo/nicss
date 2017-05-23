@@ -2,6 +2,11 @@
 
 (pronounced like `nice`)
 
+[![CircleCI](https://circleci.com/gh/DensityCo/nicss.svg?style=svg)](https://circleci.com/gh/DensityCo/nicss)
+[![Dependency Status](https://david-dm.org/densityco/nicss.svg)](https://david-dm.org/densityco/nicss)
+[![Package Version](https://img.shields.io/npm/v/@density/nicss.svg)](https://npmjs.com/@density/nicss)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
 Nicss is a css helper library that extracts exported stylesheets out of `node_modules` and symlinks them
 into a single `styles/` folder. This makes it easier to include the stylesheets of dependencies with css
 post-processors.
