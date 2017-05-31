@@ -1,4 +1,6 @@
-# Nicss
+<img src="https://cdn.rawgit.com/DensityCo/nicss/master/logo.svg" height="50" />
+
+<br />
 
 (pronounced like `nice`)
 
